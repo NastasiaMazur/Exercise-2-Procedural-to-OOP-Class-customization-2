@@ -6,7 +6,7 @@ class Canvas(list[str, ...]):  # (is a --> Inheritance):
     def __init__(self, width, height):
         super().__init__([" " * width for row in range(height)])
 
-    def print_canvas(self):
+    def print(self):
         def create_row_headers(length: int):
             return "".join([str(i % 10) for i in range(length)])
 
@@ -172,4 +172,4 @@ draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
 canvas = Canvas(100, 40)
 #print_canvas(canvas)
 
-canvas.print_canvas()
+canvas.print()
