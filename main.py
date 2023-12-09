@@ -1,15 +1,11 @@
 import math
 
+class Canvas(list[str, ...]):  # (is a --> Inheritance):
+    def __init__(self, width, height):
+        super().__init__([" " * width for row in range(height)])
 
-def print_canvas(canvas: list[str, ...]):  # Print the canvas to see the result
-    """
-    Prints the given canvas adding the column and row numbers' ones place on top, at the bottom and on both sides. It
-    makes use of an inner function, create_row_headers, to create the headers.
-    :param canvas: The canvas to print
-    """
-
+def print_canvas(canvas: Canvas):
     def create_row_headers(length: int):
-        """A helper function to create the headers when printing the canvas"""
         return "".join([str(i % 10) for i in range(length)])
 
     header = " " + create_row_headers(len(canvas[0]))
@@ -17,6 +13,23 @@ def print_canvas(canvas: list[str, ...]):  # Print the canvas to see the result
     for idx, row in enumerate(canvas):
         print(idx % 10, row, idx % 10, sep="")
     print(header)
+
+# def print_canvas(canvas: list[str, ...]):  # Print the canvas to see the result
+#     """
+#     Prints the given canvas adding the column and row numbers' ones place on top, at the bottom and on both sides. It
+#     makes use of an inner function, create_row_headers, to create the headers.
+#     :param canvas: The canvas to print
+#     """
+#
+#     def create_row_headers(length: int):
+#         """A helper function to create the headers when printing the canvas"""
+#         return "".join([str(i % 10) for i in range(length)])
+#
+#     header = " " + create_row_headers(len(canvas[0]))
+#     print(header)
+#     for idx, row in enumerate(canvas):
+#         print(idx % 10, row, idx % 10, sep="")
+#     print(header)
 
 
 def draw_polygon(canvas: list[str, ...], *points: tuple[int, int], closed: bool = True, line_char: str = "*"):
@@ -142,4 +155,6 @@ draw_rectangle(canvas, (45, 2), (80, 27), line_char='#')
 draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
 
 # Print what we have painted
+#print_canvas(canvas)
+canvas = Canvas(100, 40)
 print_canvas(canvas)
