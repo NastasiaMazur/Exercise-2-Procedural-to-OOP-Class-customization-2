@@ -16,17 +16,7 @@ class Canvas(list[str, ...]):  # (is a --> Inheritance):
             print(idx % 10, row, idx % 10, sep="")
         print(header)
 
-    def draw_polygon(canvas: list[str, ...], *points: tuple[int, int], closed: bool = True, line_char: str = "*"):
-        """
-        Draws a polygon by drawing the line segments the polygon consists of. If the polygon is closed, the last point is
-        connected with the first, e.g., a line segment between the two is drawn.
-        This function is implemented using an inner function, namely draw_line_segment. Function draw_line_segment is
-        used to draw the individual line segments that make up the polygon.
-        :param canvas: The canvas to draw the polygon on
-        :param points: The points the polygon consists of
-        :param closed: Whether the polygon is closed, e.g., the last point is connected to the first point
-        :param line_char: The character to draw the polygon with
-        """
+    def draw_polygon(self: list[str, ...], *points: tuple[int, int], closed: bool = True, line_char: str = "*"):
 
         def draw_line_segment(self: list[str, ...], start: tuple[int, int], end: tuple[int, int],
                               line_char: str = "*"):
@@ -73,6 +63,11 @@ class Canvas(list[str, ...]):  # (is a --> Inheritance):
         # Draw each segment in turn. zip is used to build tuples each consisting of a start and an end point
         for start_point, end_point in zip(start_points, end_points):
             draw_line_segment(canvas, start_point, end_point, line_char)
+
+    def draw_line(self: list[str, ...], start: tuple[int, int], end: tuple[int, int], line_char: str = "*"):
+        """Uses the draw_polygon function to draw a line from the given start to the given end point."""
+        self.draw_polygon(start, end, closed=False, line_char=line_char)
+
 
 
 # def print_canvas(canvas: Canvas):
@@ -169,9 +164,9 @@ class Canvas(list[str, ...]):  # (is a --> Inheritance):
 #         draw_line_segment(canvas, start_point, end_point, line_char)
 
 
-def draw_line(canvas: list[str, ...], start: tuple[int, int], end: tuple[int, int], line_char: str = "*"):
-    """Uses the draw_polygon function to draw a line from the given start to the given end point."""
-    draw_polygon(canvas, start, end, closed=False, line_char=line_char)
+# def draw_line(canvas: list[str, ...], start: tuple[int, int], end: tuple[int, int], line_char: str = "*"):
+#     """Uses the draw_polygon function to draw a line from the given start to the given end point."""
+#     draw_polygon(canvas, start, end, closed=False, line_char=line_char)
 
 
 def draw_rectangle(canvas: list[str, ...], upper_left: tuple[int, int], lower_right: tuple[int, int],
@@ -219,6 +214,7 @@ canvas = Canvas(canvas_width, canvas_height)
 
 # A simple line
 ##draw_line(canvas, (10, 4), (92, 19), "+")
+canvas.draw_line((10, 4), (92, 19), "+")
 # A polygon with five points, the last point will be connected to the first one
 canvas.draw_polygon((7, 12), (24, 29), (42, 15), (37, 32), (15, 35))
 # A rectangle from the upper-left corner to the lower-right corner
