@@ -76,6 +76,25 @@ class Canvas(list[str, ...]):  # (is a --> Inheritance):
 
         self.draw_polygon(upper_left, (x2, y1), lower_right, (x1, y2), line_char=line_char)
 
+    def draw_n_gon(self: list[str, ...], center: tuple[int, int], radius: int, number_of_points: int,
+                   rotation: int = 0,
+                   line_char: str = "*"):
+
+        angles = range(rotation, 360 + rotation, 360 // number_of_points)
+
+        points = []
+        for angle in angles:
+            # Convert the angle of the point to radians
+            angle_in_radians = math.radians(angle)
+            # Calculate the x and y positions of the point
+            x = center[0] + radius * math.cos(angle_in_radians)
+            y = center[1] + radius * math.sin(angle_in_radians)
+            # Add the point to the list of points as a tuple
+            points.append((round(x), round(y)))
+
+        # Use the draw_polygon function to draw all the lines of the n-gon
+        self.draw_polygon(*points, line_char=line_char)
+
 
 
 # def print_canvas(canvas: Canvas):
@@ -186,32 +205,32 @@ class Canvas(list[str, ...]):  # (is a --> Inheritance):
 #     draw_polygon(canvas, upper_left, (x2, y1), lower_right, (x1, y2), line_char=line_char)
 
 
-def draw_n_gon(canvas: list[str, ...], center: tuple[int, int], radius: int, number_of_points: int, rotation: int = 0,
-               line_char: str = "*"):
-    """
-    Draws an n-gon, that is, a polygon with n points. The n-gon is centered around the given center point
-    :param canvas: The canvas to draw on
-    :param center: The center of the n-gon to draw
-    :param radius: The radius of the n-gon to draw
-    :param number_of_points: The number of points to distribute
-    :param rotation: A optional start rotation in degrees. If not given, 0 is used
-    :param line_char: An optional character to use when drawing
-    """
-    # Distribute the points evenly around a circle
-    angles = range(rotation, 360 + rotation, 360 // number_of_points)
-
-    points = []
-    for angle in angles:
-        # Convert the angle of the point to radians
-        angle_in_radians = math.radians(angle)
-        # Calculate the x and y positions of the point
-        x = center[0] + radius * math.cos(angle_in_radians)
-        y = center[1] + radius * math.sin(angle_in_radians)
-        # Add the point to the list of points as a tuple
-        points.append((round(x), round(y)))
-
-    # Use the draw_polygon function to draw all the lines of the n-gon
-    draw_polygon(canvas, *points, line_char=line_char)
+# def draw_n_gon(canvas: list[str, ...], center: tuple[int, int], radius: int, number_of_points: int, rotation: int = 0,
+#                line_char: str = "*"):
+#     """
+#     Draws an n-gon, that is, a polygon with n points. The n-gon is centered around the given center point
+#     :param canvas: The canvas to draw on
+#     :param center: The center of the n-gon to draw
+#     :param radius: The radius of the n-gon to draw
+#     :param number_of_points: The number of points to distribute
+#     :param rotation: A optional start rotation in degrees. If not given, 0 is used
+#     :param line_char: An optional character to use when drawing
+#     """
+#     # Distribute the points evenly around a circle
+#     angles = range(rotation, 360 + rotation, 360 // number_of_points)
+#
+#     points = []
+#     for angle in angles:
+#         # Convert the angle of the point to radians
+#         angle_in_radians = math.radians(angle)
+#         # Calculate the x and y positions of the point
+#         x = center[0] + radius * math.cos(angle_in_radians)
+#         y = center[1] + radius * math.sin(angle_in_radians)
+#         # Add the point to the list of points as a tuple
+#         points.append((round(x), round(y)))
+#
+#     # Use the draw_polygon function to draw all the lines of the n-gon
+#     draw_polygon(canvas, *points, line_char=line_char)
 
 
 # Example usage:
@@ -230,6 +249,7 @@ canvas.draw_polygon((7, 12), (24, 29), (42, 15), (37, 32), (15, 35))
 canvas.draw_rectangle((45, 2), (80, 27), line_char='#')
 # An n-gon with a high number of points will appear like a circle
 ##draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
+canvas.draw_n_gon( (72, 25), 12, 20, 80, "-")
 
 # Print what we have painted
 #print_canvas(canvas)
