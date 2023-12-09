@@ -1,18 +1,31 @@
 import math
 
+
 class Canvas(list[str, ...]):  # (is a --> Inheritance):
+
     def __init__(self, width, height):
         super().__init__([" " * width for row in range(height)])
 
-def print_canvas(canvas: Canvas):
-    def create_row_headers(length: int):
-        return "".join([str(i % 10) for i in range(length)])
+    def print_canvas(self):
+        def create_row_headers(length: int):
+            return "".join([str(i % 10) for i in range(length)])
 
-    header = " " + create_row_headers(len(canvas[0]))
-    print(header)
-    for idx, row in enumerate(canvas):
-        print(idx % 10, row, idx % 10, sep="")
-    print(header)
+        header = " " + create_row_headers(len(self[0]))
+        print(header)
+        for idx, row in enumerate(self):
+            print(idx % 10, row, idx % 10, sep="")
+        print(header)
+
+
+# def print_canvas(canvas: Canvas):
+#     def create_row_headers(length: int):
+#         return "".join([str(i % 10) for i in range(length)])
+#
+#     header = " " + create_row_headers(len(canvas[0]))
+#     print(header)
+#     for idx, row in enumerate(canvas):
+#         print(idx % 10, row, idx % 10, sep="")
+#     print(header)
 
 # def print_canvas(canvas: list[str, ...]):  # Print the canvas to see the result
 #     """
@@ -157,4 +170,5 @@ draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
 # Print what we have painted
 #print_canvas(canvas)
 canvas = Canvas(100, 40)
-print_canvas(canvas)
+#print_canvas(canvas)
+canvas.print_canvas()
