@@ -68,6 +68,14 @@ class Canvas(list[str, ...]):  # (is a --> Inheritance):
         """Uses the draw_polygon function to draw a line from the given start to the given end point."""
         self.draw_polygon(start, end, closed=False, line_char=line_char)
 
+    def draw_rectangle(self: list[str, ...], upper_left: tuple[int, int], lower_right: tuple[int, int],
+                       line_char: str = "*"):
+        """Uses the draw_polygon function to draw a rectangle from the given upper-left to the given lower-right corner."""
+        x1, y1 = upper_left
+        x2, y2 = lower_right
+
+        self.draw_polygon(upper_left, (x2, y1), lower_right, (x1, y2), line_char=line_char)
+
 
 
 # def print_canvas(canvas: Canvas):
@@ -169,13 +177,13 @@ class Canvas(list[str, ...]):  # (is a --> Inheritance):
 #     draw_polygon(canvas, start, end, closed=False, line_char=line_char)
 
 
-def draw_rectangle(canvas: list[str, ...], upper_left: tuple[int, int], lower_right: tuple[int, int],
-                   line_char: str = "*"):
-    """Uses the draw_polygon function to draw a rectangle from the given upper-left to the given lower-right corner."""
-    x1, y1 = upper_left
-    x2, y2 = lower_right
-
-    draw_polygon(canvas, upper_left, (x2, y1), lower_right, (x1, y2), line_char=line_char)
+# def draw_rectangle(canvas: list[str, ...], upper_left: tuple[int, int], lower_right: tuple[int, int],
+#                    line_char: str = "*"):
+#     """Uses the draw_polygon function to draw a rectangle from the given upper-left to the given lower-right corner."""
+#     x1, y1 = upper_left
+#     x2, y2 = lower_right
+#
+#     draw_polygon(canvas, upper_left, (x2, y1), lower_right, (x1, y2), line_char=line_char)
 
 
 def draw_n_gon(canvas: list[str, ...], center: tuple[int, int], radius: int, number_of_points: int, rotation: int = 0,
@@ -219,6 +227,7 @@ canvas.draw_line((10, 4), (92, 19), "+")
 canvas.draw_polygon((7, 12), (24, 29), (42, 15), (37, 32), (15, 35))
 # A rectangle from the upper-left corner to the lower-right corner
 ##draw_rectangle(canvas, (45, 2), (80, 27), line_char='#')
+canvas.draw_rectangle((45, 2), (80, 27), line_char='#')
 # An n-gon with a high number of points will appear like a circle
 ##draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
 
