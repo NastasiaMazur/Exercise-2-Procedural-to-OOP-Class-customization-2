@@ -171,4 +171,5 @@ draw_n_gon(canvas, (72, 25), 12, 20, 80, "-")
 #print_canvas(canvas)
 canvas = Canvas(100, 40)
 #print_canvas(canvas)
+
 canvas.print_canvas()
